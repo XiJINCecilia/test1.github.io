@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>US Freight</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all">   
+    <link rel="stylesheet" href="css/owl.carousel.css" type="text/css" media="all">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900&display=swap' rel='stylesheet' type='text/css'>
+    <script src="js/modernizr.custom.js"></script>
+
+    <style>
+
+        .fade-in {
+            opacity: 0;
+            animation-name: fadeIn;
+            animation-duration: 2s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .iframe-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        .iframe-container iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+            margin-bottom: 20px;
+        }
+        @media (max-width: 768px) {
+            .iframe-container iframe {
+                height: 500px;
+            }
+        }
+        .scroll-container {
+            width: 100%;  
+            height: 600px; 
+            overflow: hidden; 
+            position: relative; 
+            border: 0px solid #ccc; 
+            background-color: #b4cdf36b;
+
+        }
+
+        .scroll-container ul {
+            position: absolute;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .scroll-container li {
+            padding: 10px; 
+        }
+        .blueback {
+            width: 100%;  
+            height: 100%; 
+            overflow: hidden; 
+            position: relative; 
+            border: 0px solid #ccc; 
+            background: #b4cdf36b;
+        }
+    </style>
+</head>
+
+    
+<body>
+
+    <!-- Header-Starts-Here -->
+    <div class="header">
+        <div class="container">
+            <!-- Navigation -->
+            <nav class="navbar navbar-inverse">
+                <!-- Get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active cl-effect-7"><a href="#slider">Home</a></li>
+                        <li class="cl-effect-7 scroll"><a href="#Introduction">Introduction</a></li>
+                        <li class="cl-effect-7 scroll"><a href="#Current">Current</a></li>
+                        <li class="cl-effect-7 scroll"><a href="#Action">Policy</a></li>
+                        <li class="cl-effect-7 scroll"><a href="#Future">Future</a></li>
+                        <li class="cl-effect-7 scroll"><a href="#Conclusion">Conclusion</a></li>
+                        <li class="cl-effect-7 scroll"><a href="#Reference">Reference</a></li>
+                        <li class="cl-effect-7 scroll"><a href="#Contact">Contact</a></li>
+                    </ul>
+                </div>
+               
+            </nav>
+        </div>
+        <!-- Slider-Starts-Here -->
+        <div class="slider">
+            <ul class="rslides" id="slider">
+                <li>
+                    <img src="images/1.jpg" alt="Tradeaux">
+                    <div class="caption">
+                        <p style="font-size: 67px; margin:aoto 50%; font-weight: bold;">How sustainable freight and logistics will influence the future </p>
+                        <br>
+                        <p style="font-size: 28px; text-align: center; font-weight: bold;">U.S. Case Study</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- //Slider-Ends-Here -->
+    </div>
+    <!-- //Header-Ends-Here -->
+   
+    
+    <!-- Introduction-Starts-Here -->
+    <div class="area" id="Introduction">
+        <h1>Introduction</h1>
+            <div class="container">
+                <span style="font-size: 18px; color: white;">Freight, which refers to the transportation of goods by various modes including trucks, trains, ships, and airplanes, is the foundation of the economy. It is essential for moving goods, facilitating trade, and driving growth.<br><br></span>
+                    <div class="area1">
+                        <div class="col-md-4 col-sm-4 air slideanim fade-in" style="animation-delay: 0s;">
+                            <div class="area-image">
+                                <img src="images/intro1.jpg" alt="Tradeaux">
+                            </div>
+                            <div class="area-info">
+                                <p>In 2018, the U.S. transportation system moved a daily average of about <strong>51 million</strong> tons of freight valued at nearly <strong>$52 billion</strong>. In 2022, Trucks carry <strong>72.6%</strong> of all domestic freight by weight and <strong>80.7%</strong> by value.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-sm-4 sea slideanim fade-in" style="animation-delay: 1s;">
+                            <div class="area-image">
+                                <img src="images/intro2.jpg" alt="Tradeaux">
+                            </div>
+                            <div class="area-info">
+                                <p>More goods transportation over longer distances means more energy consumption and environmental pollution, which has impacting the quality of life in cities and their sustainability.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-sm-4 land slideanim fade-in" style="animation-delay: 2s;">
+                            <div class="area-image">
+                                <img src="images/intro3.jpg" alt="Tradeaux">
+                            </div>
+                            <div class="area-info">
+                                <h4>What will happen in the future? <br>Let's explore together.</h4>
+                            </div>
+                        </div>
+                            <div class="clearfix"></div>
+                    </div>
+            </div>
+    </div>
+    <!-- //Introduction-Ends-Here -->
+
+    
+    <!-- Current-Starts-Here -->
+        <div class="national-current" id="Current">
+            <div class="blueback slideanim fade-in" style="animation-delay: 0.3s;"><h3>Current State Analysis</h3></div>
+            <p class="h4">National Scale</p>
+            <br> 
+            <p style="padding-left: 200px; padding-right: 200px; font-size: 18px;">To better understand the sustainability progress of U.S. freight and logistics, the current trends in energy consumption and greenhouse gas emissions related to freight transportation have been selected for depiction of the various impacts and trends over the past decade.</p>
+            <div class="button-container">
+                <button id="btn1" class="emission-button" style="background-color: #aed0ee;">Energy Consumption</button>
+                <button id="btn2" class="emission-button" style="background-color: #88abda;">Transportation Greenhouse Gas Emissions</button>
+                <button id="btn3" class="emission-button" style="background-color: #5976ba;">Freight Greenhouse Gas Emissions</button>
+            </div>
+
+            <table border="0">
+                <tr>
+                    <td>              
+                        <iframe id="emissionFrame" src="emission.html" style="width:1000px; height:630px; border:none;animation-delay: 0.5s" class=" slideanim fade-in"></iframe>
+                    </td>
+                    <td>
+                        <div id="descriptionText" style="padding:10px; width:300px; font-size:18px; background-color: rgba(174, 208, 238, 0.3);">
+                            <!-- Text content will be dynamically displayed here based on button clicks -->
+                            <span style="font-weight: bold; font-size: larger; color: #2e59a7;">Energy Consumption by Freight Transportation Modes: </span><br>Analysing energy consumption trends in U.S. freight transportation, this graph showcases the substantial energy demand of trucking. It reinforces the necessity for energy-efficient practices and the adoption of green technologies to ensure sustainable logistics.
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            
+            <!-- New text display container -->
+            <div id="descriptionText" style="padding:20px;"></div>
+        </div>
+        <p class="h4" style="text-align: center;">State Scale</p>
+        <br>
+        <p style="padding-left: 200px; padding-right: 200px; font-size: 18px; ">Below are the freight value details of some typical states in the United States:</p>
+        <div class="flow" style="display: flex; align-items: flex-start;">
+            <!-- iframe  -->
+            <div style="flex: 5; min-width: 0;animation-delay: 0.5s;" class="slideanim fade-in">
+                <iframe src="total.his.html" width="100%" height="700px" style="border: none;"></iframe>
+            </div>
+            <!-- text -->
+            <div style="flex: 1; padding-right: 100px;">
+                <p><br><br> <br> <br>This graph displays the total freight value in millions of dollars for each state in the United States during the year 2022. From the graph, we can observe that <span style="font-size: larger; color: #2e59a7;"><strong>Texas, California, Illinois, New York and Pennsylvania</strong></span> are the states with the highest freight values, indicating their significant roles in goods transportation within the country. This information is crucial for understanding the distribution and economic impact of freight activities across different regions. Based on these insights, a freight flow map was created for these top five states to further analyse and visualise their specific freight dynamics.</p>
+            </div>
+        </div>   
+        <p style="padding-left: 200px; padding-right: 200px; font-size: 18px;">This is a flow map showing some routes of the freight:</p>
+        <br>
+        <div style="width: 100%; padding: 10px; text-align: center;">
+            <button onclick="showContent('intro')" style="background-color: #aed0ee;">Introduction</button>
+            <button onclick="showContent('ca')" style="background-color: #88abda;">California</button>
+            <button onclick="showContent('il')" style="background-color: #6f94cd;">Illinois</button>
+            <button onclick="showContent('ny')" style="background-color: #5976ba;">New York</button>
+            <button onclick="showContent('pa')" style="background-color: #2e59a7;">Pennsylvania</button>
+            <button onclick="showContent('tx')" style="background-color: #12264f;">Texas</button>
+            <br>
+            <p id="content" style="font-size: 18px; ">Click on each button to show detailed information.</p>
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center; height: 100vh;animation-delay: 0.5s;" class="slideanim fade-in">
+            <iframe src="freight_flow.html" style="width: 80%; height: 850px; border: none; margin: auto;"></iframe>
+        </div>            
+    <!-- //Current-Ends-Here -->
+
+    <br><br>
+    
+    <!-- Policy-Starts-Here -->
+    <div class="Action" id="Action">
+        <br><br>
+        <div class="blueback slideanim fade-in" style="animation-delay: 0.3s;"><h3>Policy and Trends</h3></div> 
+        <div class="container"; class="blueback">
+            <br>
+            <p style="font-size: 18px;">Based on the flow map, the states with the highest freight values will be the focus of our next examination. We will look into <span style="font-size: 20px; color: #2e59a7;"><strong>the policy changes </strong></span>in these top-performing states to understand how regulations and initiatives are influencing their economic activities related to freight and transportation. This analysis will help in identifying the impact of legislative adjustments on the logistics and supply chain sectors within these states. </p>
+            <br><br>
+        </div>
+        <div style="display: flex; align-items: center;animation-delay: 0.5s;" class="slideanim fade-in">
+            <iframe src="policy.html" width="90%" height="850px" style="margin:auto; margin-left: 10%; margin-right: 3%"></iframe>
+                <div style="width: 20%; padding-right: 100px; font-size: 18px;">Low emission zones and timed freight passes have been established, encouraging logistics companies to operate during off-peak hours. Big data and artificial intelligence used in delivery optimizing, reducing energy consumption. Logistics companies use real-time data analysis to predict market demand and adjust transportation plans in advance. Also, <span style="font-size: 20px; color: #2e59a7;"><strong>electric vehicles</strong></span> increasingly occupying the market.</div>
+        </div>
+        <br><br><br><br>
+        <p style="padding-left: 200px; padding-right: 200px; font-size: 18px; "> Below are graphs with information about <span style="font-size: 20px; color: #2e59a7;"><strong>electric vehicles:</strong></span></p>
+        <div class="container">
+            <div class="electric">
+                <div class="button-container" style="width: 100%; padding: 10px; text-align: center;">
+                    <button id="btn4" class="electric-button" style="background-color: #aed0ee; margin-top: 20px;">Share of new electric vehcles</button>
+                    <button id="btn5" class="electric-button" style="background-color: #88abda; margin-top: 20px;">Electric vehcle types</button>
+                    <button id="btn6" class="electric-button" style="background-color: #5976ba; margin-top: 20px;">Electric vehcle stocks</button>
+                </div>
+                <div style="animation-delay: 0.5s;" class="iframe-container slideanim fade-in">
+                    <iframe id="electricFrame" src="electric-sold.html" style="width:100%; height:650px; border:none;"></iframe>
+                </div>
+                <p style="font-size: 18px">This graph shows the share of new cars sold in the United States that are electric, spanning from 2010 to 2023. From the graph, it's clear that electric vehicle (EV) sales have experienced significant growth, especially from 2021 onwards. <span style="font-size: 20px; color: #2e59a7;"><strong>This trend indicates a rapidly growing acceptance and adoption of electric vehicles in the U.S. market.</strong></span></p> 
+            </div>
+        </div>        
+        <div class="container">
+            <div class="graph-container slideanim fade-in" style="animation-delay: 0.5s;">
+                <iframe src="routes.html" width="100%"  height="650px" style="margin:auto; border: none; margin-top:50px;"></iframe>   
+            </div>               
+            <p style="font-size: 18px">The figure above summarizes the path required from the current standard of 161 gCO2 per mile in 2026 to 85 gCO2 per mile in 2030 for the whole light duty fleet. As shown, in order to meet the fleet-wide target of 85 gCO2 per mile in 2030, manufacturers will have to <span style="font-size: 20px; color: #2e59a7;"><strong>reduce emissions by 6.8% annually from 2020 to 2026, and by 14.7% annually from 2026 to 2030.</strong></span> We estimate that efficiency improvements in gasoline vehicles will range from 3.5% to 4.4% annually and will only cover a portion of the required emission reductions. However, <span style="font-size: 20px; color: #2e59a7;"><strong>the acceleration of EV uptake to 50% of sales</strong></span> can make up the difference.</p> 
+        </div>
+    </div>
+    <!-- //Policy-Ends-Here -->
+
+    <br><br>
+
+    <!-- Future-Starts-Here -->
+	<div class="Action" id="Future">
+        <div class="blueback slideanim fade-in" style="animation-delay: 0.3s;"><h3>Future Projections</h3></div>
+        <div class="container">
+            <br><br>
+            <p style="font-size: 18px; "><span style="font-size: 18px; color: #2e59a7;"><strong>Looking</strong></span> into the future of U.S. freight transportation, the Freight Analysis Framework (FAF) database provides estimates of U.S. freight flows from 2020 to 2050, with values expressed in millions of 2017 constant dollars. As we project into the future up to 2050, it suggests a significant increase in the economic value of intrastate freight shipments across the United States. This growth is driven by a combination of factors, including economic expansion, increased domestic production, and advancements in logistics and freight technologies.</p>
+            <br>
+            <div class="slideanim fade-in" style="animation-delay: 0.5s;">
+                <iframe src="cb 2.html" width="100%" height="800px" style="border:none;"></iframe>
+            </div>
+            <br><br>
+            <div class="slideanim fade-in" style="animation-delay: 0.5s;">
+                <iframe src="future freight.html" width="100%" height="500px" style="border:none;"></iframe>
+            </div>      
+            <p style="font-size: 18px;"><span style="font-size: 18px; color: #2e59a7;"><strong>Trucking Dominance:</strong></span> Truck transportation consistently has the highest freight values, indicating its critical role in domestic freight movements.</p>
+            <p style="font-size: 18px;"><span style="font-size: 18px; color: #2e59a7;"><strong>Growing Pipeline Transport: </strong></span>There is a noticeable trend in the increasing freight value transported through pipelines, possibly reflecting the growing importance of energy transportation.</p>
+            <p style="font-size: 18px;"><span style="font-size: 18px; color: #2e59a7;"><strong>Variability in Modes: </strong></span>The dataset shows variability in the freight values of other transportation modes like rail, water, and air, suggesting shifting logistics and trade routes over time.</p>
+            <p style="font-size: 18px;"><span style="font-size: 18px; color: #2e59a7;"><strong>Projection Data: </strong></span>The dataset includes future projections, pointing to expectations of growth or changes in transportation needs and infrastructure development.</p>
+            <br>
+            <p style="font-size: 18px;">This data provides a comprehensive look at the evolution and projected future of freight transportation across various modes in the United States. It can be particularly useful for planning, policy-making, and investment decisions in infrastructure and transportation services.</p>     
+        </div> 
+    </div>
+    <div class="clearfix"></div>
+	<!-- Future-Ends-Here -->
+
+    <br><br>
+				
+    <!-- Conclusion-Starts-Here -->
+    <div class="Conclusion" id="Conclusion">
+        <div class="blueback slideanim fade-in" style="animation-delay: 0.3s;"><h3>Conclusion</h3></div>
+        <div class="container">
+            <br><br>
+            <p style="font-size: 18px;">The analysis of <span style="font-size: 18px; color: #2e59a7;"><strong>current state</strong></span> of sustainable logistics practices helps viewers understand the complexities and advancements in this field, showing that freight transport has a significant impact on sustainability.</p>
+            <br>
+            <p style="font-size: 18px;">Through the detailed examination of <span style="font-size: 18px; color: #2e59a7;"><strong>policies and trends</strong></span>, the project underscores the impact of governmental and regulatory actions on sustainable practices within freight and logistics. It highlights how past and present policies have shaped the industry and suggests how future legislative and regulatory frameworks can further influence sustainability in the sector. And electric vehicles are increasingly important.</p>
+            <br>
+            <p style="font-size: 18px;">The <span style="font-size: 18px; color: #2e59a7;"><strong>"future reveries"</strong></span> section indicates that truck transportation consistently has the highest freight values and volumes, so optimization of truck transportation and freight structure is important to sustainability. This section allows viewers to engage with speculative, forward-thinking scenarios, imagining how continued advancements and innovations might further transform the logistics and freight industry.</p>
+            <br>
+            <p style="font-size: 18px;"><span style="font-size: 18px; color: #2e59a7;"><strong>Overall</strong></span>, this project provides a multi-faceted view of how sustainability is being integrated into freight and logistics, offering valuable lessons, insights, and inspiration for a range of audiences from industry stakeholders to policymakers and the general public.</p>
+        </div>
+    </div>
+    <!-- Conclusion-Ends-Here -->   
+        
+    <br><br>
+    
+    <!-- Reference-Starts-Here -->
+    <div class="gallery slideanim" id="Reference">
+        <div id="Reference" class="blueback">
+        	<h3>References and data sources</h3>
+            <br>
+        </div>
+        <div id="referencesContainer" class="scroll-container">
+            <ul>
+                <li><a href="https://ww2.arb.ca.gov/our-work/programs/california-sustainable-freight-action-plan/about">https://ww2.arb.ca.gov/our-work/programs/california-sustainable-freight-action-plan/about</a></li>
+                <li><a href="https://www.transportation.gov/freight/NFSP">https://www.transportation.gov/freight/NFSP</a></li>
+                <li><a href="https://www.epa.gov/smartway/smartway-program-successes">https://www.epa.gov/smartway/smartway-program-successes</a></li>
+                <li><a href="https://sustainablepa.org/focus-area/transportation/">https://sustainablepa.org/focus-area/transportation/</a></li>
+                <li><a href="https://www.epa.gov/sites/default/files/2016-05/documents/sw-ccac-webinar-2014-11-12.pdf">https://www.epa.gov/sites/default/files/2016-05/documents/sw-ccac-webinar-2014-11-12.pdf</a></li>
+                <li><a href="https://www.nyc.gov/html/dot/downloads/pdf/freight-vision-plan-delivering-green.pdf">https://www.nyc.gov/html/dot/downloads/pdf/freight-vision-plan-delivering-green.pdf</a></li>
+                <li><a href="https://ops.fhwa.dot.gov/fastact/atcmtd/2017/applications/texasdot/project.htm">https://ops.fhwa.dot.gov/fastact/atcmtd/2017/applications/texasdot/project.htm</a></li>
+                <li><a href="https://www.transportation.gov/mission/office-secretary/office-policy/freight/freight-infrastructure-and-policy/texas-freight-plan">https://www.transportation.gov/mission/office-secretary/office-policy/freight/freight-infrastructure-and-policy/texas-freight-plan</a></li>
+                <li><a href="https://www.nctcog.org/trans/plan/freight/regional-freight-system">https://www.nctcog.org/trans/plan/freight/regional-freight-system</a></li>
+                <li><a href="https://www.penndot.pa.gov/ProjectAndPrograms/Planning/Documents/FMP/FMP-Pub%20791_WEB_05.01.2023-compressed.pdf">https://www.penndot.pa.gov/ProjectAndPrograms/Planning/Documents/FMP/FMP-Pub%20791_WEB_05.01.2023-compressed.pdf</a></li>
+                <li><a href="https://theicct.org/us-ghg-standards-ev-sales-sep22/">https://theicct.org/us-ghg-standards-ev-sales-sep22/</a></li>
+                <li><a href="https://www.epa.gov/automotive-trends/explore-automotive-trends-data#SummaryData">https://www.epa.gov/automotive-trends/explore-automotive-trends-data#SummaryData</a></li>
+                <li><a href="https://ourworldindata.org/electric-car-sales">https://ourworldindata.org/electric-car-sales</a></li>
+                <li><a href="https://data.bts.gov/stories/s/Moving-Goods-in-the-United-States/bcyt-rqmu/">https://data.bts.gov/stories/s/Moving-Goods-in-the-United-States/bcyt-rqmu/</a></li>
+                <li><a href="https://www.bts.gov/faf">https://www.bts.gov/faf</a></li>
+                <li><a href="https://www.bts.gov/browse-statistical-products-and-data/freight-facts-and-figures/us-greenhouse-gas-emissions-domestic">https://www.bts.gov/browse-statistical-products-and-data/freight-facts-and-figures/us-greenhouse-gas-emissions-domestic</a></li>
+                <li><a href="https://www.transportation.gov/sites/dot.gov/files/2020-09/NFSP_fullplan_508_0.pdf">https://www.transportation.gov/sites/dot.gov/files/2020-09/NFSP_fullplan_508_0.pdf</a></li>
+                <li><a href="https://www.trucking.org/economics-and-industry-data">https://www.trucking.org/economics-and-industry-data</a></li>
+                <li><a href="https://www.epa.gov/smartway/smartway-program-successes">https://www.epa.gov/smartway/smartway-program-successes</a></li>
+                <li><a href="https://www.wisdotplans.gov/plan/state-freight-plan">https://www.wisdotplans.gov/plan/state-freight-plan</a></li>
+                <li><a href="https://www.dot.nd.gov/construction-and-planning/construction-planning/programs-and-planning/freight-rail-plan">https://www.dot.nd.gov/construction-and-planning/construction-planning/programs-and-planning/freight-rail-plan</a></li>
+                <li><a href="https://www.bts.gov/browse-statistical-products-and-data/state-transportation-statistics/freight-flows-state">https://www.bts.gov/browse-statistical-products-and-data/state-transportation-statistics/freight-flows-state</a></li>
+                <li><a href="https://faf.ornl.gov/faf5/dtt_total.aspx">https://faf.ornl.gov/faf5/dtt_total.aspx</a></li>   
+            </ul>
+        </div>
+    </div>
+    <!-- Reference-Ends-Here-->        
+            
+            
+    <!-- Footer-Starts-Here -->
+    <div class="footer" id="Contact">
+        <div class="container">
+            <div class="footer-info slideanim">
+                <div class="col-md-3 footer-info-grid links">
+                	<h4>QUICK LINKS</h4>
+                	<ul>
+	                    <li><a href="#">Home</a></li>
+	                    <li><a href="#Introduction">Introduction</a></li>
+	                    <li><a href="#Current">Current</a></li>
+	                    <li><a href="#Action">Policy</a></li>
+	                    <li><a href="#Future">Future</a></li>
+                        <li><a href="#Conclusion">Conclusion</a></li>   
+	                </ul>
+                </div>
+                <div class="col-md-3 footer-info-grid address">
+                    <h4>TEAM</h4>
+                    <address>
+                        <ul>
+                            <li>TongHui Zhou</li>
+                            <li>Xi Jin</li>
+                            <li>YiHan Xu</li>    	
+                        </ul>
+	                </address>
+                </div>
+                <div class="col-md-3 footer-info-grid services">
+                    <br><br>
+                    <ul>
+                        <li>Created for the CASA003-Digital Visualisation in 2024.</li> 
+                    </ul>
+                </div>  
+                <div class="clearfix"></div>
+            </div>
+            <div class="social-icons">
+	            <ul class="social slideanim" id="follow">
+	                <li><a href="#" class="facebook" title="Go to Our Facebook(Github) Page"></a></li>
+	                <li><a href="#" class="twitter" title="Go to Our Twitter(Github) Account"></a></li>
+	                <li><a href="#" class="googleplus" title="Go to Our Google Plus(Github) Account"></a></li>
+	                <li><a href="#" class="instagram" title="Go to Our Instagram(Github) Account"></a></li>
+	                <li><a href="#" class="youtube" title="Go to Our Youtube(Github) Channel"></a></li>
+	            </ul>
+            </div>
+        </div>
+    </div>
+    <!-- //Footer-Ends-Here -->
+
+
+    <!-- Supportive-JavaScript -->
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    
+
+    <!-- Necessary-JS-File-For-Bootstrap -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+
+    <!-- SmoothScroll-JavaScript -->
+    <script>
+        $(document).ready(function(){
+            // Add smooth scrolling to all links in navbar + footer link
+            $(".navbar li a, .footer a[href='#myPage']").on('click', function(event) {
+
+            // Prevent default anchor click behavior
+            event.preventDefault();
+
+            // Store hash
+            var hash = this.hash;
+
+            // Using jQuery's animate() method to add smooth page scroll
+            // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+            $('html, body').animate({
+              scrollTop: $(hash).offset().top
+            }, 900, function(){
+           
+              // Add hash (#) to URL when done scrolling (default click behavior)
+              window.location.hash = hash;
+            });
+            });
+          
+            $(window).scroll(function() {
+            $(".slideanim").each(function(){
+                var pos = $(this).offset().top;
+
+                var winTop = $(window).scrollTop();
+                if (pos < winTop + 600) {
+                  $(this).addClass("slide");
+                }
+                });
+            });
+        })
+    </script>
+    <!-- //SmoothScroll-JavaScript -->
+
+
+    <!-- Slideanim-JavaScript -->
+    <script type="text/javascript">
+        $(window).scroll(function() {
+            $(".slideanim").each(function(){
+                var pos = $(this).offset().top;
+
+                var winTop = $(window).scrollTop();
+                    if (pos < winTop + 600) {
+                    $(this).addClass("slide");
+                }
+            });
+        });
+    </script>
+    <!-- //Slideanim-JavaScript -->
+
+   
+    <!-- Owl-Carousel-JavaScript -->
+	<script src="js/owl.carousel.js"></script>
+	<script>
+		$(document).ready(function() {
+			$("#owl-demo").owlCarousel ({
+				items : 4,
+				lazyLoad : true,
+				autoPlay : true,
+				pagination : false,
+			});
+		});
+	</script>
+    <!-- //Owl-Carousel-JavaScript -->
+
+
+    <!-- Banner-Slider-JavaScript -->
+	<script src="js/responsiveslides.min.js"></script>
+	<script>
+		$(function () {
+			$("#slider").responsiveSlides({
+			  auto: true,
+			  nav: true,
+			  speed: 500,
+			  namespace: "callbacks",
+			  pager: true,
+			});
+		  });
+	</script>
+    <!-- //Banner-Slider-JavaScript -->    
+    
+
+	<!-- Slide-To-Top JavaScript (No-Need-To-Change) -->
+	<script type="text/javascript">
+		$(document).ready(function() {           
+			$().UItoTop({ easingType: 'easeOutQuart' });            
+		});
+	</script>
+	<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+    <!-- //Slide-To-Top JavaScript -->
+	
+    
+	<!-- Smooth-Scrolling-JavaScript -->
+	<script type="text/javascript" src="js/move-top.js"></script>
+	<script type="text/javascript" src="js/easing.js"></script>
+	<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){		
+					event.preventDefault();
+					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+				});
+			});
+	</script>
+	<!-- //Smooth-Scrolling-JavaScript -->
+	
+
+	<!-- FlexSlider-JavaScript -->
+    <script defer src="js/jquery.flexslider.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            SyntaxHighlighter.all();
+        });
+        $(window).load(function(){
+            $('.flexslider').flexslider({
+                animation: "slide",
+                start: function(slider){
+                    $('body').removeClass('loading');
+                }
+            });
+        });
+    </script>
+    <!-- //FlexSlider-JavaScript -->
+	
+    
+    <!-- Current-JavaScript --> 
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('btn1').addEventListener('click', function() {
+            document.getElementById('emissionFrame').src = 'emission.html';
+            document.getElementById('descriptionText').innerHTML = '<span style="font-weight: bold; font-size: larger; color: #2e59a7;">Energy Consumption by Freight Transportation Modes:</span><br>Analysing energy consumption trends in U.S. freight transportation, this graph showcases the substantial energy demand of trucking. It reinforces the necessity for energy-efficient practices and the adoption of green technologies to ensure sustainable logistics.';
+        });
+
+        document.getElementById('btn2').addEventListener('click', function() {
+            document.getElementById('emissionFrame').src = 'emission2.html';
+            document.getElementById('descriptionText').innerHTML = '<span style="font-weight: bold; font-size: larger; color: #2e59a7;">Total Transportation Greenhouse Gas Emissions:</span> <br>Comparing total emissions from passenger and freight transportation, this visualization underscores the growing impact of freight operations on the environment, advocating for innovative policies and technologies to curb emissions.';
+        });
+
+        document.getElementById('btn3').addEventListener('click', function() {
+            document.getElementById('emissionFrame').src = 'emission3.html';
+            document.getElementById('descriptionText').innerHTML = '<span style="font-weight: bold; font-size: larger; color: #2e59a7;">Greenhouse Gas Emissions by Transportation Type:</span> <br>This chart was selected to show the specific contributions of different modes of transportation to overall emissions, identifying key areas where interventions can have the most significant environmental impact.';
+        });
+    });
+    </script>
+    <!-- //Current-JavaScript --> 
+     
+    
+    <!-- Policy-JavaScript -->   
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('btn4').addEventListener('click', function() {
+            document.getElementById('electricFrame').src = 'electric-sold.html';
+    
+        });
+    
+        document.getElementById('btn5').addEventListener('click', function() {
+            document.getElementById('electricFrame').src = 'electric-type.html';
+    
+        });
+    
+        document.getElementById('btn6').addEventListener('click', function() {
+            document.getElementById('electricFrame').src = 'electric-stocks.html';
+        });
+    });
+    </script>
+    <!-- //Policy-JavaScript --> 
+
+
+    <!-- Slide-JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Options for the observer (which part of the item must be visible)
+            const options = {
+                threshold: 0.1  // 10% of the element must be visible
+            };
+        
+            // Callback function to execute when entries are observed
+            const observer = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting){
+                        entry.target.classList.add('fade-in');
+                    } else {
+                        entry.target.classList.remove('fade-in');
+                    }
+                });
+            }, options);
+        
+            // Target elements with the class "slideanim"
+            const targets = document.querySelectorAll('.slideanim');
+            targets.forEach(target => {
+                observer.observe(target);
+            });
+        });
+    </script>
+    <!-- //Slide-JavaScript -->
+
+    
+    <!-- Flowmap-JavaScript -->
+    <script>
+        function showContent(location) {
+            var content = {
+                intro: "This is an interactive flow map that visualizes the total freight value for each state in the U.S. Users can click on circles representing each state on the map to view the total freight value for that state. Additionally, a dropdown menu allows users to select from the five states with the highest freight volumes. Upon selection, users can view detailed freight routes originating from the chosen state. The color intensity of each route on the map varies, with blue representing lower freight values and transitioning to pink for higher values, providing a visual indication of the volume of goods transported.<br> <br>For each displayed freight route, users can click on the individual routes to access basic information about that route. This information may include the origin and destination states, the total freight value of goods transported along the route, the types of goods commonly shipped, and any significant economic impacts or logistical details relevant to that route. This interactive tool is designed to provide a comprehensive overview of freight dynamics across the U.S., offering insights into trade flows and their economic implications.",
+                ca: "The analysis of the top 20 freight values in 2022 between California and other states shows that the highest total values are found in trade between California and itself, followed by significant trade interactions with Texas, Arizona, Nevada, and Ohio. Here's a breakdown of the significance of these top entries:<br><span style='font-size: larger; color: #2e59a7; font-weight: bold;'>California - California:</span> The highest freight value, nearly $1.93 billion, is internal to California. This indicates a substantial amount of movement of goods within the state itself, underscoring its large economy and diverse industries requiring extensive logistics networks.<br><span style='font-size: larger; color: #2e59a7; font-weight: bold;'>California - Texas:</span> The second-highest freight value, over $103.87 million, highlights the significant economic connections between California and Texas, likely driven by both states' large economies and diverse industries including technology, agriculture, and manufacturing.<br><span style='font-size: larger; color: #2e59a7; font-weight: bold;'>California - Arizona:</span> With a freight value of approximately $60.38 million, the robust economic ties likely reflect proximity and shared sectors such as electronics and agriculture.<br><span style='font-size: larger; color: #2e59a7; font-weight: bold;'>California - Nevada: </span>Around $53.78 million in freight value is indicative of close economic and geographical ties, emphasizing sectors like entertainment, tourism, and technology.<br><span style='font-size: larger; color: #2e59a7; font-weight: bold;'>California - Ohio: </span>The freight value of about $51.20 million showcases significant business relations, likely in manufacturing, technology, and consumer goods.<br>These top trade values reflect the economic vitality and interconnectedness of these states, with California serving as a pivotal hub in the U.S. freight and logistics network. This analysis helps understand the flow of goods across state lines and can inform strategies for infrastructure, investment, and economic policy to optimize freight operations.",
+                il: "The analysis of the top 20 freight values for Illinois in 2022 shows the following key insights into the state's freight movements:<br><span style='font-size: larger; color: #2e59a7; font-weight: bold;'>Illinois - Illinois: </span> The highest freight value of approximately $693 million indicates a strong internal movement of goods, reflecting a diverse and active economic landscape within the state itself.<br><span style='font-size: larger; color: #2e59a7; font-weight: bold;'>Illinois - Indiana:</span> The second highest, around $124.9 million in freight value, emphasizes strong economic ties with its neighbouring state, likely facilitated by shared industries such as manufacturing and agriculture.<br><span style='font-size: larger; color: #2e59a7; font-weight: bold;'>Illinois - Wisconsin:</span> With a freight value of approximately $74.25 million, this connection underscores regional commerce, particularly in sectors like manufacturing and dairy production, prevalent in both states.<br><span style='font-size: larger; color: #2e59a7; font-weight: bold;'>Illinois - Michigan: </span>Freight valued at about $56.44 million, highlighting significant trade in the automotive and manufacturing sectors, given Michigan's prominent automotive industry.<br><span style='font-size: larger; color: #2e59a7; font-weight: bold;'>Illinois - Texas: </span>Freight value around $46.45 million, indicating substantial trade activities, possibly in energy, agricultural products, and technology.<br>This analysis provides insight into the most significant freight corridors for Illinois, highlighting the state's key economic relationships and sectors driving freight movements. It aids in understanding regional economic dynamics and can inform infrastructure and logistic strategies.",
+                ny: "The analysis of the top 20 freight values for New York in 2022 reveals key insights into the state's significant freight movements:<br><span style='font-size: larger; color: #2e59a7; font-weight: bold;'>New York - New York: </span>Dominating with a freight value of approximately $577.83 million, this highlights extensive intra-state trade, showcasing a robust internal economy with diverse industries such as finance, technology, and retail.<br><span style='font-size: larger; color: #2e59a7; font-weight: bold;'>New York - New Jersey: </span>The second highest, around $83.07 million, underscores the close economic ties and inter-state commerce facilitated by their proximity and shared industries like pharmaceuticals, finance, and manufacturing.<br><span style='font-size: larger; color: #2e59a7; font-weight: bold;'>New York - Pennsylvania: </span>With a value of approximately $71.41 million, this connection points to strong economic interactions, likely in sectors such as food production, manufacturing, and energy.<br><span style='font-size: larger; color: #2e59a7; font-weight: bold;'>New York - California: </span>A significant value of about $36.2 million, reflecting major trade in technology, entertainment, and finance.<br><span style='font-size: larger; color: #2e59a7; font-weight: bold;'>New York - Massachusetts: </span>Freight valued at around $29.10 million, indicating strong connections in education, technology, and healthcare sectors.<br>These top trade values illustrate New York's pivotal role in the national economy, interacting significantly within its own borders and with neighbouring states, as well as across the country, driven by its diverse economy and strategic location. This data aids in understanding the flow of goods and can help guide economic and infrastructure planning.",
+                pa: "The analysis of the top 20 freight values for Pennsylvania in 2022 reveals key insights into the state's freight movements:<br><span style='font-size: larger; color: #2e59a7; font-weight: bold;'>Pennsylvania - Pennsylvania: </span>The highest freight value, about $388.51 million, underscores a significant amount of internal goods movement, reflecting the state's robust manufacturing, agricultural, and energy sectors.<br><span style='font-size: larger; color: #2e59a7; font-weight: bold;'>Pennsylvania - New Jersey: </span>Second highest with approximately $105.94 million, indicating strong economic connections, particularly in sectors like pharmaceuticals, manufacturing, and consumer goods due to geographic proximity.<br><span style='font-size: larger; color: #2e59a7; font-weight: bold;'>Pennsylvania - New York: </span>Freight value around $101.38 million, highlighting significant trade in financial services, food products, and manufacturing goods.<br><span style='font-size: larger; color: #2e59a7; font-weight: bold;'>Pennsylvania - Ohio: </span>A significant freight value of about $51.05 million, reflecting shared industrial activities, especially in manufacturing and energy.<br><span style='font-size: larger; color: #2e59a7; font-weight: bold;'>Pennsylvania - Maryland: </span>Freight valued at approximately $36.61 million, likely driven by shared sectors such as healthcare, biosciences, and agribusiness.<br>These findings illustrate Pennsylvania's strategic importance in the U.S. logistics network, serving as a vital link between the Northeast and other parts of the country. This data is critical for understanding economic ties and planning for infrastructure improvements and logistics strategies.",
+                tx: "The analysis of the top 20 freight values for Texas in 2022 provides a detailed look at the state's significant freight interactions:<br><span style='font-size: larger; color: #2e59a7; font-weight: bold;'>Texas - Texas: </span>Dominating with a freight value of approximately $2.64 billion, reflecting intense intra-state trade. This highlights Texas's vast economic diversity and large geographic area, which supports significant movements of oil, gas, technology, and agricultural products.<br><span style='font-size: larger; color: #2e59a7; font-weight: bold;'>Texas - Louisiana: </span>Second highest at around $135.12 million, likely driven by the oil and gas industry, given the proximity of energy hubs between these two states.<br><span style='font-size: larger; color: #2e59a7; font-weight: bold;'>Texas - California: </span>Significant freight value of about $86.25 million, illustrating strong trade relations in sectors such as technology, entertainment, and agriculture.<br><span style='font-size: larger; color: #2e59a7; font-weight: bold;'>Texas - Michigan: </span>Freight valued at approximately $76.57 million, likely emphasizing the automotive industry and related manufacturing goods.<br><span style='font-size: larger; color: #2e59a7; font-weight: bold;'>Texas - Oklahoma: </span>Around $74.17 million in freight, which can be attributed to shared industries like energy and agriculture due to geographical and economic similarities.<br>These insights illustrate Texas's pivotal role as a key logistic hub in the U.S., with significant freight movements both within the state and across the nation. This data is crucial for understanding economic ties, planning for infrastructure improvements, and optimizing logistic strategies."
+            };
+
+
+            document.getElementById("content").style.textAlign = "left";
+            document.getElementById("content").style.marginLeft = "200px";
+            document.getElementById("content").style.marginRight = "200px";
+            document.getElementById("content").innerHTML = content[location];
+        }
+    </script>
+    <!-- //Flowmap-JavaScript -->
+
+
+    <!-- References-JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var scrollStep = 1; 
+            var scrollContainer = document.getElementById('referencesContainer');
+            var scrollContent = scrollContainer.querySelector('ul');
+            
+            
+            scrollContent.innerHTML += scrollContent.innerHTML;
+        
+            function startScrolling() {
+                scrollContainer.scrollTop += scrollStep;
+                
+                
+                if (scrollContainer.scrollTop >= scrollContent.offsetHeight / 2) {
+                    scrollContainer.scrollTop = 0;
+                }
+            }
+        
+            var intervalId = setInterval(startScrolling, 20); 
+        
+            
+            scrollContainer.addEventListener('mouseenter', function() {
+                clearInterval(intervalId);
+            });
+        
+            scrollContainer.addEventListener('mouseleave', function() {
+                intervalId = setInterval(startScrolling, 20);
+            });
+        });
+    </script>  
+    <!-- //References-JavaScript -->
+    
+    
+</body>
+</html>

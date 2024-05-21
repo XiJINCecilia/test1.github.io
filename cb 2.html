@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>US shipments within a state</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        #map {
+            width: 100%;
+            height: 600px;
+            
+        }
+        #slider-container {
+            text-align: center;
+            margin: 20px 0;
+            width: 80%; /* 设置滑块容器宽度为80% */
+            margin: 20px auto; /* 居中显示 */
+        }
+        #yearSlider {
+            width: 100%; /* 设置滑块宽度为100% */
+        }
+        #yearLabel {
+            font-size: 18px; /* 调整年份显示的字体大小 */
+        }
+        .info, .legend {
+            padding: 8px;
+            background: white;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 5px;
+        }
+        .legend i {
+            width: 18px;
+            height: 18px;
+            float: left;
+            margin-right: 8px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+    <p style="font-size: 24px; text-align: center; color:rgba(0,0,0,0.8) ;weight: 'bold'">Percent of shipments within a state 2020-2050</p>
+    <div id="slider-container">
+        <input type="range" min="2020" max="2050" step="5" value="2020" id="yearSlider">
+        <span id="yearLabel">Slide to view data between 2020 and 2050</span>
+    </div>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([37.8, -96], 4);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        function getColor(d) {
+            return d > 0.75 ? '#12264f' :  
+           d > 0.7  ? '#1c3f7b' :  
+           d > 0.65 ? '#2e59a7' :  
+           d > 0.6  ? '#415ea8' :  
+           d > 0.55 ? '#5976ba' :  
+           d > 0.5  ? '#637ea9' :  
+           d > 0.45 ? '#6f94cd' :  
+           d > 0.4  ? '#7ca2d0' :  
+           d > 0.35 ? '#88abda' :  
+           d > 0.3  ? '#95b8df' :  
+           d > 0.25 ? '#aed0ee' :  
+                      '#d7e7f7';   
+        }
+
+        function style(feature) {
+            return {
+                fillColor: getColor(feature.properties['Percent within state']),
+                weight: 2,
+                opacity: 1,
+                color: 'white',
+                dashArray: '3',
+                fillOpacity: 0.7
+            };
+        }
+
+        function highlightFeature(e) {
+            var layer = e.target;
+
+            layer.setStyle({
+                weight: 3,
+                color: '#666',
+                dashArray: '',
+                fillOpacity: 0.7
+            });
+
+            layer.bringToFront();
+
+            info.update(layer.feature.properties);
+        }
+
+        function resetHighlight(e) {
+            geojson.resetStyle(e.target);
+            info.update();
+        }
+
+        function zoomToFeature(e) {
+            map.fitBounds(e.target.getBounds());
+        }
+
+        function onEachFeature(feature, layer) {
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: zoomToFeature
+            });
+        }
+
+        var info = L.control();
+
+        info.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'info');
+            this.update();
+            return this._div;
+        };
+
+        info.update = function (props) {
+            this._div.innerHTML =  (props ?
+                '<b>' + props.name + '</b><br />' +
+                'Percent of shipments within state: ' + (props['Percent within state'] * 100).toFixed(2) + '%<br />' +
+                'Value of shipments within state (millions of 2017 $): $'+ props['Shipments within (millions of 2017 $)'].toLocaleString() +'<br/>' +
+                'Total value of shipments(millions of 2017 $): $' + props['Total shipments from (millions of 2017 $)'].toLocaleString() 
+                : 'Hover over to see details');
+        };
+
+        info.addTo(map);
+
+        var legend = L.control({position: 'bottomright'});
+
+        legend.onAdd = function (map) {
+            var div = L.DomUtil.create('div', 'legend'),
+                grades = [0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7],
+                labels = [];
+
+            div.innerHTML += '<h4>Percent within state</h4>';
+
+            for (var i = 0; i < grades.length; i++) {
+                div.innerHTML +=
+                    '<i style="background:' + getColor(grades[i] + 0.05) + '"></i> ' +
+                    grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+            }
+
+            return div;
+        };
+
+        legend.addTo(map);
+
+        var geojson;
+        var year = 2020;
+        var geojsonLayers = {};
+
+        function loadGeoJson(year) {
+            if (geojsonLayers[year]) {
+                if (geojson) {
+                    map.removeLayer(geojson);
+                }
+                geojson = geojsonLayers[year];
+                geojson.addTo(map);
+                return;
+            }
+
+            fetch('https://raw.githubusercontent.com/XiJINCecilia/U.S.-Freight-Energy-and-Emissions/main/' + year + 'data.geojson' )
+                .then(response => response.json())
+                .then(data => {
+                    if (geojson) {
+                        map.removeLayer(geojson);
+                    }
+                    geojson = L.geoJson(data, {
+                        style: style,
+                        onEachFeature: onEachFeature
+                    }).addTo(map);
+                    geojsonLayers[year] = geojson;
+                });
+        }
+
+        document.getElementById('yearSlider').addEventListener('input', function(e) {
+            year = e.target.value;
+            document.getElementById('yearLabel').textContent = year;
+            loadGeoJson(year);
+        });
+
+        loadGeoJson(year);
+    </script>
+
+</body>
+</html>

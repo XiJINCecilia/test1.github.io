@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>U.S. Freight Greenhouse Gas Emissions 2010-2021</title>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<script charset="utf-8" src="https://d3js.org/d3.v4.min.js"></script>
+<script charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/dimple/2.3.0/dimple.latest.min.js"></script>
+<style>    
+    #chartContainer {width: 740px; margin: auto; margin-top: 50px; }
+    #chartContainer p {margin-left: 50px; margin-bottom: 5px; margin-top: 0; padding: 0;}
+    #charttitle {font: bold 20px Verdana, sans-serif;}
+</style>
+</head>
+<body>
+<div id="chartContainer">
+    <p id="charttitle">U.S. Freight Greenhouse Gas Emissions 2010-2021</p>
+    <p id="chartsubhead">by Domestic Freight Transportation Type</p>
+</div>
+<script>
+    d3.csv("https://raw.githubusercontent.com/XiJINCecilia/U.S.-Freight-Energy-and-Emissions/main/table3.csv", function(data) {
+        var svg = dimple.newSvg("#chartContainer", 800, 480);
+        var chartdata = [];
+
+        // Prepare data
+        data.forEach(function(d) {
+            Object.keys(d).forEach(function(year) {
+                if (year !== "Type" && year !== "Index" && d[year] !== "U") {
+                    chartdata.push({
+                        "Category": d.Type.trim(),
+                        "Year": year,
+                        "Consumption": parseInt(d[year].replace(/,/g, ''))
+                    });
+                }
+            });
+        });
+
+        var myChart = new dimple.chart(svg, chartdata);
+        myChart.setBounds(50, 30, 720, 410);
+
+        var x = myChart.addCategoryAxis("x", "Year");
+        var y = myChart.addMeasureAxis("y", "Consumption");
+
+        var s = myChart.addSeries("Category", dimple.plot.bar);
+        s.barGap = 0.4;
+
+        // Custom colors
+        var colors = ['#12264f', '#5976ba','#6f94cd' , '#2e59a7','#88abda'];
+        chartdata.map(function (d) { return d.Category; })
+            .filter(function (value, index, self) { return self.indexOf(value) === index; })
+            .forEach(function (category, index) {
+                myChart.assignColor(category, colors[index % colors.length]);
+            });
+
+        myChart.addLegend(50, 10, 720, 20, "right");
+
+        myChart.stacked = true;
+        myChart.draw(800);
+    });
+</script>
+</body>
+</html>

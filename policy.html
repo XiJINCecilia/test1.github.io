@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Map of Policy Changes in the United States</title>
+    <meta charset="utf-8">
+    
+    <!--MapBox-->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js"></script>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            width: 100%;  
+            height: 100vh; 
+            margin-top: 0px;
+        }
+
+
+        .info-panel {
+            top: 20%;
+            left: 15px;
+            width: 370px;
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8);
+            float: left; 
+            padding: 12px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3); 
+        }
+
+        .info-panel p {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            font-weight: bold; 
+        }
+
+        .policy-details {
+            font-size: 16px; 
+            color: #666; 
+            line-height: 1.4;
+            margin-top: 5px; 
+        }
+
+
+        .data-display {
+            margin-top: 10px; /* Space below the heading */
+        }
+
+        .control-panel {
+            position: absolute; 
+            top: 50px; 
+            left: 20px; 
+            width: auto; 
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px; 
+            border-radius: 5px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
+            z-index: 1000; 
+        }
+
+
+        input[type="range"] {
+            width: 100%; 
+            margin: 12px 0; 
+        }
+
+        label {
+            margin-right: 20px; 
+            font-size: 18px; 
+        }
+
+
+        output {
+            font-size: 18px; 
+            display: block; 
+            margin-top: 5px; 
+        }
+
+    </style>
+
+</head>
+ 
+    
+<body> 
+    
+    <!-- map -->
+    <div id="map"></div>
+    
+    
+    <!-- text -->
+    <div class="info-panel">
+        <h2>United States Policy Changes of Fright and Logistics Over Time</h2>
+        <div class="data-display">
+            Change with slider 
+           <!-- This will be dynamically filled with policy changes --> 
+        </div>
+    </div>
+    
+    <!-- slider -->
+    <div class="control-panel">
+    <label for="slider">Timeline of policy changes</label>
+    <input type="range" id="slider" min="2014" max="2023" value="2014" step="1">
+    <output id="sliderValue">2014</output>
+    </div>   
+    
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        const API_TOKEN_Mapbox = 'pk.eyJ1IjoidGF5ZW4iLCJhIjoiY2xyN3I4ZjJoMmV1NDJpbnY1aHkzYzRyMCJ9.0IJKqxiZvYhjC5ln2yC1bQ';
+        mapboxgl.accessToken = API_TOKEN_Mapbox;
+    
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/tayen/clw2vm7sh02jm01qp8anvdqmr',
+            center: [-108, 39.8283],
+            zoom: 4
+        });
+    
+        // import data of policy changes 
+        var policyChanges = [
+          {
+            "date": "2014",
+            "changes": [
+              {"state": "New York", "policy": "Green Freight Goes Global: Developing a Global Green Freight Action Plan", "details": 'The programme aims to reduce carbon emissions and other pollution from the global freight and logistics industry, and to drive the global freight industry towards greener, more efficient freight transport by promoting the adoption of cleaner technologies.'}
+            ]
+          },  
+         {
+            "date": "2015",
+            "changes": [
+              {"state": "California", "policy": "The California Sustainable Freight Action Plan", "details": 'This plan includes the transition of zero-emission vehicle (ZEV) trucks and other freight vehicles, as well as a series of incentive programs such as the Community Air Protection Program (AB 617) and the Hybrid and Zero-Emission Truck and Bus Voucher Incentive Program (HVIP).'}
+            ]
+          },
+          {
+            "date": "2019",
+            "changes": [
+              {"state": "New York", "policy": "Climate Leadership and Community Protection Act(CLCPA)", "details": 'The bill calls for reductions in overall greenhouse gas emissions, including emissions from the transport and logistics sectors.'},
+              {"state": "Pennsylvania", "policy": "Vehicle Carbon Reduction and Efficiency (Low Carbon Fleet Policy)", "details":'Municipalities can significantly reduce their own carbon footprint by converting their fleet vehicles to low-carbon alternatives.'}
+            ]
+          },
+          {
+            "date": "2020",
+            "changes": [
+              {"state": "national", "policy": "National Fright Strategic Plan(NFSP)", "details":"It is the first of its kind, outlining a comprehensive vision for the future of America's freight system."}
+            ]
+          },
+          {
+            "date": "2021",
+            "changes": [
+              {"state": "national", "policy": "Clean Trucks Plan", "details":'It is a comprehensive strategy aimed at reducing pollution from heavy-duty vehicles to improve public health and address climate change.'},
+              {"state": "national", "policy": "Federal Sustainable Plan", "details":'It aims to catalyze the American clean energy industry and create jobs through federal sustainability efforts.'},
+              {"state": "New York", "policy": "Delivering Green: a vision for a sustainable freight networking serving New York City", "details":"The plan focuses on reducing reliance on trucks while increasing the share of goods transported by water, rail and cargo bikes."},
+              {"state": "national", "policy": "Infrastructure Investment and Jobs Act", "details":'The Act provides funding for the modernisation and sustainability of transport infrastructure, including improvements to the freight network and support for the spread of clean energy transport.'}
+            ]
+          },
+          {
+            "date": "2022",
+            "changes": [
+              {"state": "Texas", "policy": "Texas Connected Freight Corridors: A Sustainable Connected Vehicle Deployment", "details":"It will be Texas' largest deployment of connected vehicle (CV) technology aimed at making a significant reduction in the number and severity of crashes, reducing congestion on major interstates that serve the nation, and reducing fuel consumption of freight trucks."}
+            ]
+          },
+          {
+            "date": "2023",
+            "changes": [
+              {"state": "Texas", "policy": "Texas Freight Plan", "details": "This plan outlines strategies to enhance Texas's freight mobility, and it has been adopted by the Texas Transportation Commission, pending submission to the Federal Highway Administration."},
+              {"state": "Pennsylvania", "policy": "Pennsylvania 2045 Freight Movement Plan", "details":"It is designed to improve multimodal freight movement while fostering sustainable economic growth. It reviews current and future freight trends and maintains an investment plan for projects enhancing freight mobility."}
+            ]
+          }
+        ]
+        
+        map.on('load', function () {
+            
+            map.addLayer({
+                id: 'polygon',
+                type: 'fill',
+                source: {
+                type: 'vector',
+                url: 'mapbox://tayen.4k2tt68e' },
+                'source-layer': 'map-US-1ynovv', 
+                'layout': {
+                    'visibility': 'visible'
+                },
+                paint: {
+                    'fill-color': '#fff',
+                    'fill-opacity': 0
+                    }
+            });
+
+        // Add a layer for highlighting specific states
+            map.addLayer({
+                id: 'highlight-layer',
+                type: 'line',
+                source: {
+                type: 'vector',
+                url: 'mapbox://tayen.2ztby7kj' },
+                'source-layer': 'merge-0wpjfz', 
+                paint: {
+                    'line-width': 8,
+                    'line-color':'#fff'
+                    },
+                filter: ['in', 'NAME', ''] 
+            });
+        });
+            
+            
+        var slider = document.getElementById('slider');
+        var output = document.getElementById('sliderValue');
+
+
+        slider.oninput = function() {
+            output.textContent = this.value;
+            var date = this.value.toString();
+            var relevantChanges = policyChanges.find(p => p.date === date);
+        
+        // Clear the previous content in the data-display div
+        document.querySelector('.data-display').innerHTML = '';
+            
+            
+        if (relevantChanges) {
+            var statesToHighlight = [];
+            // Populate the info-panel with policy changes
+            var changesHtml = '';
+            relevantChanges.changes.forEach(change => {
+                statesToHighlight.push(change.state);
+                changesHtml += `<div class="policy-entry">
+                        <p><strong>${change.state}:</strong> ${change.policy}</p>
+                        <div class="policy-details">${change.details}</div>
+                    </div>`;
+            });
+            
+            document.querySelector('.data-display').innerHTML = changesHtml;
+            map.setFilter('highlight-layer', ['in', 'NAME', ...statesToHighlight]);
+        } else {
+            map.setFilter('highlight-layer', ['in', 'NAME', '']); 
+            }
+        };
+    });
+
+    
+</script>
+       
+    
+</body>
+</html>

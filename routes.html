@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enhanced Vehicle Emissions and EV Sales Trends Visualization</title>
+<link href="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div style="width:100%; margin: 20px auto;">
+        <canvas id="emissionsChart"></canvas>
+    </div>
+    <script>
+        const ctx = document.getElementById('emissionsChart').getContext('2d');
+        const emissionsChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['2020', '2022', '2024', '2026', '2028', '2030'],
+                datasets: [{
+                    label: 'Fleetwide GHG Target (gCO2/mi)',
+                    data: [245, 220, 205, 161, 120, 85],
+                    borderColor: '#12264f',
+                    backgroundColor: 'rgba(0, 63, 92, 0)',
+                    fill: false,
+                    yAxisID: 'y',
+                    tension: 0.1
+                }, {
+                    label: 'Fleet Average Gasoline Vehicle Performance (gCO2/mi)',
+                    data: [254, 245, 230, 193, 180, 168],
+                    borderColor: '#5976ba',
+                    backgroundColor: 'rgba(188, 80, 144, 0)',
+                    fill: false,
+                    yAxisID: 'y',
+                    tension: 0.1
+                }, {
+                    label: 'Electric Vehicle Sales Share (%)',
+                    data: [2.3, 7, 17, 30, 40, 50],
+                    borderColor: '#aed0ee',
+                    backgroundColor: 'rgba(255, 166, 0, 0)',
+                    fill: false,
+                    yAxisID: 'y1',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            usePointStyle: true
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Stringency of model year 2030 GHG targets needed to reach 50% EV sales in 2030',
+                        font: {
+                            size: 18
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        title: {
+                            display: true,
+                            text: 'gCO2 per mile'
+                        }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        title: {
+                            display: true,
+                            text: 'Sales Share (%)'
+                        },
+                        grid: {
+                            drawOnChartArea: false
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

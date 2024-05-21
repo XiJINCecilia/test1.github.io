@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>U.S. Energy Consumption 2010-2021</title>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<script charset="utf-8" src="https://d3js.org/d3.v4.min.js"></script>
+<script charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/dimple/2.3.0/dimple.latest.min.js"></script>
+<style>    
+    #chartContainer {width: 740px; margin: auto; margin-top: 50px; }
+    #chartContainer p {margin-left: 50px; margin-bottom: 5px; margin-top: 0; padding: 0;}
+    #charttitle {font: bold 20px Verdana, sans-serif;}
+</style>
+</head>
+<body>
+<div id="chartContainer">
+    <p id="charttitle">U.S. Energy Consumption 2010-2021</p>
+    <p id="chartsubhead">by Select Freight Transportation Modes</p>
+</div>
+<script>
+    d3.csv("https://raw.githubusercontent.com/XiJINCecilia/U.S.-Freight-Energy-and-Emissions/main/table1.csv", function(CityData) {
+        var svg = dimple.newSvg("#chartContainer", 800, 500); // Adjusted height for better layout
+        var chartdata = [];
+
+        CityData.forEach(function(entry) {
+            Object.keys(entry).forEach(function(year) {
+                if (year !== "Style" && year !== "Index" && entry[year] !== "U") {
+                    chartdata.push({
+                        "Style": entry.Style.trim(),
+                        "Year": year,
+                        "Energy Consumption (trillions of Btu)": parseInt(entry[year].replace(/,/g, ''))
+                    });
+                }
+            });
+        });
+
+        var myChart = new dimple.chart(svg, chartdata);
+        myChart.setBounds(60, 30, 650, 380); // Adjusted bounds to give more space for the legend
+        var x = myChart.addTimeAxis("x", "Year", "%Y", "%Y");
+        var y = myChart.addMeasureAxis("y", "Energy Consumption (trillions of Btu)");
+
+        var s = myChart.addSeries("Style", dimple.plot.line);
+        s.interpolation = "cardinal";
+        s.lineWeight = 2;
+
+        var colors = ['#12264f', '#aed0ee', '#6f94cd', '#5976ba'];
+        chartdata.map(function(d) { return d.Style; })
+            .filter(function(value, index, self) { return self.indexOf(value) === index; })
+            .forEach(function(style, index) {
+                myChart.assignColor(style, colors[index % colors.length]);
+            });
+
+        myChart.addLegend(100, 10, 630, 60, "right"); // Adjusted legend position to be below the chart area
+        myChart.draw(500);
+    });
+</script>
+</body>
+</html>

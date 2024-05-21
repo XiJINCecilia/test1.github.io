@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>US Car Sales Visualization</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    // Data for the United States
+    const usData = [
+        {"Entity":"United States","Year":2011,"Plug-in hybrid as a share of cars sold":0.06741573,"Battery-electric as a share of cars sold":0.08258427},
+        {"Entity":"United States","Year":2012,"Plug-in hybrid as a share of cars sold":0.3033333,"Battery-electric as a share of cars sold":0.11666666},
+        {"Entity":"United States","Year":2013,"Plug-in hybrid as a share of cars sold":0.35865977,"Battery-electric as a share of cars sold":0.3513402},
+        {"Entity":"United States","Year":2014,"Plug-in hybrid as a share of cars sold":0.35889828,"Battery-electric as a share of cars sold":0.4111017},
+        {"Entity":"United States","Year":2015,"Plug-in hybrid as a share of cars sold":0.26403508,"Battery-electric as a share of cars sold":0.4359649},
+        {"Entity":"United States","Year":2016,"Plug-in hybrid as a share of cars sold":0.4516875,"Battery-electric as a share of cars sold":0.5383125},
+        {"Entity":"United States","Year":2017,"Plug-in hybrid as a share of cars sold":0.6298969,"Battery-electric as a share of cars sold":0.6701031},
+        {"Entity":"United States","Year":2018,"Plug-in hybrid as a share of cars sold":0.76666665,"Battery-electric as a share of cars sold":1.5333333},
+        {"Entity":"United States","Year":2019,"Plug-in hybrid as a share of cars sold":0.54923075,"Battery-electric as a share of cars sold":1.5507692},
+        {"Entity":"United States","Year":2020,"Plug-in hybrid as a share of cars sold":0.50068027,"Battery-electric as a share of cars sold":1.7993197},
+        {"Entity":"United States","Year":2021,"Plug-in hybrid as a share of cars sold":1.1936507,"Battery-electric as a share of cars sold":3.506349},
+        {"Entity":"United States","Year":2022,"Plug-in hybrid as a share of cars sold":1.420202,"Battery-electric as a share of cars sold":5.979798},
+        {"Entity":"United States","Year":2023,"Plug-in hybrid as a share of cars sold":1.9820144,"Battery-electric as a share of cars sold":7.517986}
+    ];
+
+    window.onload = function() {
+        // Extract years and shares from the data
+        const years = usData.map(item => item.Year);
+        const plugInShares = usData.map(item => item['Plug-in hybrid as a share of cars sold']);
+        const batteryShares = usData.map(item => item['Battery-electric as a share of cars sold']);
+
+        // Initialize chart
+        const ctx = document.getElementById('chart').getContext('2d');
+        let chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: years,
+                datasets: [
+                    {
+                        label: 'Plug-in hybrid as a share of cars sold',
+                        data: plugInShares,
+                        backgroundColor: '#6f94cd',
+                        borderColor: '#6f94cd',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Battery-electric as a share of cars sold',
+                        data: batteryShares,
+                        backgroundColor: '#aed0ee',
+                        borderColor: '#aed0ee',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Percentage (%)'
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Share of new cars sold that are battery-electric and plug-in hybrid in the US, 2011-2023',
+                        font: {
+                            size: 18,
+                            weight: 'bold'
+                        },
+                        padding: {
+                            top: 10,
+                            bottom: 20
+                        }
+                    }
+                }
+            }
+        });
+    };
+    </script>
+</head>
+<body>
+    <div>
+        <canvas id="chart"></canvas>
+    </div>
+</body>
+</html>

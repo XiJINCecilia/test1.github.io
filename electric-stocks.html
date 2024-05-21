@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Electric Vehicle Stocks Visualization</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Electric vehicle stock data
+        const data = [
+            {Year: 2011, Stock: 22000},
+            {Year: 2012, Stock: 75000},
+            {Year: 2013, Stock: 172000},
+            {Year: 2014, Stock: 290000},
+            {Year: 2015, Stock: 400000},
+            {Year: 2016, Stock: 570000},
+            {Year: 2017, Stock: 760000},
+            {Year: 2018, Stock: 1120000},
+            {Year: 2019, Stock: 1450000},
+            {Year: 2020, Stock: 1740000},
+            {Year: 2021, Stock: 2220000},
+            {Year: 2022, Stock: 3010000},
+            {Year: 2023, Stock: 4800000}
+        ];
+
+        window.onload = function() {
+            // Extract years and stocks from the data
+            const years = data.map(item => item.Year);
+            const stocks = data.map(item => item.Stock);
+
+            // Initialize chart
+            const ctx = document.getElementById('chart').getContext('2d');
+            let chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: years,
+                    datasets: [{
+                        label: 'Electric car stocks',
+                        data: stocks,
+                        backgroundColor: 'rgba(136, 171, 218, 0.4)',
+                        borderColor: 'rgba(136, 171, 218, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Vehicles'
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Electric vehicle stocks, 2011 to 2023',
+                            font: {
+                            size: 18,
+                                weight: 'bold'
+                            },
+                            padding: {
+                                top: 10,
+                                bottom: 20
+                            }
+                        }
+                    }
+                }
+            });
+        };
+    </script>
+</head>
+<body>
+    <div>
+        <canvas id="chart"></canvas>
+    </div>
+</body>
+</html>

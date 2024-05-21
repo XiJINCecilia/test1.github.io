@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transportation Data Visualization</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+</head>
+<body>
+    <div style="width: 80%; margin :  auto">
+        <canvas id="myChart"></canvas>
+    </div>
+    <script>
+    // Fetch the CSV data
+    fetch('https://raw.githubusercontent.com/ucfnxuo/Group0003/main/Total_Transportation_Data_All_Modes.csv')
+    .then(response => response.text())
+    .then(csvString => {
+        // Parse the CSV data
+        let data = Papa.parse(csvString, { header: true, dynamicTyping: true }).data;
+
+        // Extract years and transportation modes
+        const years = [...new Set(data.map(row => row.Year))].sort();
+        const modes = Object.keys(data[0]).filter(key => key !== 'Year');
+
+        // Custom colors for each mode
+        const customColors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#bcbd22'];
+
+        const datasets = modes.map((mode, index) => ({
+            label: mode,
+            data: years.map(year => {
+                const row = data.find(r => r.Year === year);
+                return row ? row[mode] : 0;
+            }),
+            backgroundColor: customColors[index % customColors.length], // Use custom colors for point background
+            borderColor: customColors[index % customColors.length], // Set the same color for line
+            fill: false, // Ensure lines are not filled
+            pointBackgroundColor: customColors[index % customColors.length], // Color for points
+            pointBorderColor: customColors[index % customColors.length] // Border color for points
+        }));
+
+        // Setup the chart
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'line', // Use a line chart type
+            data: {
+                labels: years,
+                datasets: datasets
+            },
+            options: {
+                scales: {
+                    y: {
+                        // Configure the y-axis if needed
+                    },
+                    x: {
+                        // Configure the x-axis if needed
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'right'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Transportation Volumes by Mode Over Years (thousand tons)',
+                        font: {
+                            size: 18
+                        }
+                    }
+                }
+            }
+        });
+    });
+    </script>
+</body>
+</html>
+
